@@ -8,5 +8,5 @@ export function hashConvert(pass){
 
 export function hashCompare(oldPass,newPass)
 {
-    return bcrypt.compareSync(newPass,oldpass)
+    return bcrypt.compareSync(newPass,oldPass)
 }
