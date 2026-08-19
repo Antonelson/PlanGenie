@@ -1,7 +1,8 @@
 import express from "express";
-import authRoutes from "./routes/auth.js";
+import authRoutes from "./routes/authRoutes/auth.js";
 import "dotenv/config";
 import mongoose from "mongoose";
+import postRoute from "./routes/postRoutes/post.js";
 
 
 const port = process.env.PORT;
@@ -14,7 +15,7 @@ async function connectDB()
 }
 app.use(express.json());
 app.use("/auth", authRoutes);
-
+app.use("/post", postRoute);
 
 app.listen(port,()=>{
     console.log(`Server is running on port ${port}`);
