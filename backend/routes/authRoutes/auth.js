@@ -25,12 +25,11 @@ router.post("/register", user_val, async (req, res) => {
       password: hashConvert(data.password),
     });
     const result = await user.save();
-    // console.log(result);
   } catch (err) {
     return res.status(500).send(err.message);
   }
 
-  res.status(201).send("done");
+  res.status(201).json({status:"success"});
 });
 
 router.post("/login", user_val, async (req, res) => {

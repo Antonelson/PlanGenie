@@ -1,9 +1,10 @@
 import { checkSchema } from "express-validator";
 
 const user_val=checkSchema({
-     trim:true,
-        normalizeEmail:true,
+     
         gmail:{
+        trim:true,
+        normalizeEmail:true,
         isEmail:{
             errorMessage:"Enter Valid Gmail"
         },
