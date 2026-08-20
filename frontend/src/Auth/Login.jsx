@@ -1,7 +1,7 @@
 import {useState} from "react"
 
 export default function Login(){
-    const [gmail,setgmail]=useState("")
+    const [email,setEmail]=useState("")
     const [password,setPassword]=useState("")
 
 
@@ -11,16 +11,16 @@ export default function Login(){
         const response=await fetch("http://localhost:3000/auth/login",{
             method:"POST",
             headers:{"Content-Type":"application/json"},
-            body:JSON.stringify({gmail:gmail,password:password})
+            body:JSON.stringify({gmail:email,password:password})
         })
-
-        console.log(response)
+    const result = await response.json();
+    console.log(result)
     }
 
    
     return (<> <form onSubmit={handleSubmit}>
-        <label>gmail</label>
-        <input type="gmail" value={gmail} onChange={(e)=>{setgmail(e.target.value)}}/>
+        <label>Email</label>
+        <input type="email" value={email} onChange={(e)=>{setEmail(e.target.value)}}/>
         <br></br>
         <label>Password</label>
         <input type="password" value={password} onChange={(e)=>{setPassword(e.target.value)}}/>
