@@ -1,30 +1,97 @@
-import {useState} from "react"
+import { useState ,useEffect} from "react";
+import styles from "./Login.module.css";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
-export default function Login(){
-    const [email,setEmail]=useState("")
-    const [password,setPassword]=useState("")
-
-
-    async function handleSubmit(e){
-        e.preventDefault()
-        console.log("SAfasf")
-        const response=await fetch("http://localhost:3000/auth/login",{
-            method:"POST",
-            headers:{"Content-Type":"application/json"},
-            body:JSON.stringify({gmail:email,password:password})
-        })
-    const result = await response.json();
-    console.log(result)
-    }
-
+export default function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
    
-    return (<> <form onSubmit={handleSubmit}>
-        <label>Email</label>
-        <input type="email" value={email} onChange={(e)=>{setEmail(e.target.value)}}/>
-        <br></br>
-        <label>Password</label>
-        <input type="password" value={password} onChange={(e)=>{setPassword(e.target.value)}}/>
-        <br></br>
-        <button type="submit">Login</button>
-    </form></>)
+  const navigate = useNavigate();
+  const location = useLocation();
+  const msg = location.state?.success;
+  
+  useEffect(()=>{ if (msg) {
+    toast.success("Registered successfully. Please log in.");
+  }},[msg])
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    const response = await fetch("http://localhost:3000/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      credentials:"include",
+      body: JSON.stringify({ gmail: email, password: password }),
+      
+    });
+    const data=await response.json();
+    if(!response.ok)
+    {
+      toast.error(data.message);
+      return;
+    }
+    toast.success(data.message)
+    navigate("/promptpage");
+  }
+
+  return (<>
+    <div className={styles.page}>
+      <div className={styles.brandPanel}>
+        <div className={styles.dotPattern} />
+        <div className={styles.brandContent}>
+          <span className={styles.logo}>Planwise</span>
+          <h1 className={styles.brandHeading}>
+            Turn intentions into
+            <br />
+            finished tasks.
+          </h1>
+          <p className={styles.brandSub}>
+            Describe a goal. Get a plan you can actually work through.
+          </p>
+        </div>
+      </div>
+
+      <div className={styles.formPanel}>
+        <div className={styles.formCard}>
+          <h2 className={styles.title}>Welcome back</h2>
+          <p className={styles.subtitle}>
+            Log in to pick up where you left off.
+          </p>
+
+          <form onSubmit={handleSubmit} className={styles.form}>
+            <div className={styles.field}>
+              <label className={styles.label}>Email</label>
+              <input
+                className={styles.input}
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+
+            <div className={styles.field}>
+              <label className={styles.label}>Password</label>
+              <input
+                className={styles.input}
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+
+            <button type="submit" className={styles.submitBtn}>
+              Log in
+            </button>
+          </form>
+
+          <p className={styles.switchText}>
+            Don't have an account?{" "}
+            <Link to="/register" className={styles.switchText}>Register</Link>
+          </p>
+        </div>
+      </div>
+    </div>
+    </>
+  );
 }
