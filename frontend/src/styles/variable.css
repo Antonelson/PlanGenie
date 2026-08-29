@@ -1,8 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap');
 
 :root {
-  /* Colors */
-  --color-bg: #0e0f13;
+  Colors */
+  /* --color-bg: #0e0f13;
   --color-surface: #1a1c24;
   --color-surface-elevated: #202330;
   --color-primary: #f0a202;
@@ -10,7 +10,34 @@
   --color-text: #eceef2;
   --color-text-muted: #8b8e98;
   --color-border: #2a2d38;
-  --color-danger: #ef4444;
+  --color-danger: #ef4444; */
+
+  /* Type */
+  /* --font-display: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif; */
+
+  /* Radius / spacing */
+  /* --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 32px;
+} */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  /* Colors */
+  --color-bg: #0f1115;
+  --color-surface: #171a20;
+  --color-surface-elevated: #1e222a;
+  --color-primary: #5b8def;
+  --color-primary-hover: #4574d6;
+  --color-text: #e4e6eb;
+  --color-text-muted: #868c99;
+  --color-border: #262a33;
+  --color-danger: #e5484d;
 
   /* Type */
   --font-display: 'Space Grotesk', sans-serif;

@@ -18,15 +18,30 @@
 
 .title {
   font-family: var(--font-display);
-  font-size: 28px;
-  font-weight: 600;
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
   color: var(--color-text);
+  position: relative;
+  display: inline-block;
+  padding-bottom: 10px;
+}
+
+.title::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 36px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--color-primary);
 }
 
 .subtitle {
   color: var(--color-text-muted);
   font-size: 14px;
-  margin-top: 8px;
+  margin-top: 14px;
   line-height: 1.5;
   max-width: 480px;
 }
@@ -34,6 +49,7 @@
 .form {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
+  border-top: 2px solid var(--color-primary);
   border-radius: var(--radius-lg);
   padding: 28px;
   display: flex;
@@ -57,6 +73,54 @@
 .textarea:focus {
   border-color: var(--color-primary);
   background: var(--color-surface);
+}
+
+.radioGroup {
+  display: flex;
+  gap: var(--spacing-lg);
+}
+
+.radioLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-text);
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.radioLabel input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  border: 1.5px solid var(--color-border);
+  border-radius: 50%;
+  background: var(--color-surface-elevated);
+  cursor: pointer;
+  position: relative;
+  transition: border-color 0.15s ease;
+}
+
+.radioLabel input[type="radio"]:hover {
+  border-color: var(--color-text-muted);
+}
+
+.radioLabel input[type="radio"]:checked {
+  border-color: var(--color-primary);
+}
+
+.radioLabel input[type="radio"]:checked::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  transform: translate(-50%, -50%);
 }
 
 .submitBtn {
@@ -92,9 +156,11 @@
 
 .planTitle {
   font-family: var(--font-display);
-  font-size: 18px;
+  font-size: 13px;
   font-weight: 600;
-  color: var(--color-text);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
   margin-bottom: var(--spacing-md);
 }
 
@@ -109,23 +175,24 @@
 
 .taskItem {
   display: flex;
-  gap: 12px;
+  gap: 14px;
   align-items: flex-start;
 }
 
 .taskIndex {
   flex-shrink: 0;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
   background: var(--color-surface-elevated);
-  border: 1px solid var(--color-border);
+  border: 1.5px solid var(--color-border);
   color: var(--color-primary);
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 600;
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 1px;
 }
 
 .taskName {
@@ -139,4 +206,13 @@
   font-size: 13px;
   margin-top: 4px;
   line-height: 1.5;
+}
+.description {
+  color: var(--color-text);
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.75;
+  margin-top: 4px;
+  max-width: 62ch;
+  white-space: pre-wrap;
 }
