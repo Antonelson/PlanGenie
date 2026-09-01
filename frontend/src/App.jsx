@@ -5,7 +5,7 @@ function App() {
   return (
     <>
       <Toaster
-        position="top-right"
+        position="bottom-right"
         toastOptions={{
           style: {
             background: "#1a1c24",

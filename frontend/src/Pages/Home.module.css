@@ -94,7 +94,11 @@
   border-color: var(--color-primary);
   background: var(--color-surface-elevated);
 }
-
+.heroVdo{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 @media (max-width: 860px) {
   .imagePanel {
     display: none;
