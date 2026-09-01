@@ -3,7 +3,7 @@ import jwtMiddleware from "../../middleware/authMiddleware.js";
 import "dotenv/config";
 import callGemini from "../../helper_methods/callGemini.js";
 import { Details } from "../../Schema/checkListSchema.js";
-
+import {Description} from "../../Schema/Description.js"
 const router = express.Router();
 
 router.get("/check", jwtMiddleware, (req, res) => {
@@ -81,5 +81,17 @@ router.post("/checklistSave", async (req, res) => {
   const result=await detail.save();
   res.send(result);
 });
+
+router.post("/descriptionsave",async (req,res)=>{
+  console.log(req.body);
+  let {body:{heading,description}}=req;
+
+  const descriptionObj=new Description(
+    {heading:heading,description:description}
+  )
+  const result=await descriptionObj.save();
+  res.send(result)
+})
+
 
 export default router;

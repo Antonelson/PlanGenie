@@ -42,6 +42,17 @@ export default function PromptPage() {
       setLoading(false);
     }
   }
+  async function savedDescription() {
+    const response=await fetch("http://localhost:3000/post/descriptionsave",{
+      method:"POST",
+      credentials:"include",
+      body:JSON.stringify({heading,description:desc}),
+      headers:{"Content-Type":"application/json"},
+      
+    })
+    toast.success("Saved as Description");
+    clear("desc")
+  }
   async function saveCheckList(){
     const response=await fetch("http://localhost:3000/post/checklistsave",{
       method:"POST",
@@ -130,7 +141,7 @@ export default function PromptPage() {
           })}
         {plan.length > 0 && (
           <>
-            <button className={`${styles.submitBtn} ${styles.last}`} onClick={saveCheckList}>
+            <button className={`${styles.submitBtn} ${styles.last}`} onClick={saveResult}>
               Convert To CheckList
             </button>
             <button className={styles.submitBtn} onClick={()=>{clear("plan");toast.success("Discarded")}}>Discard</button>
@@ -139,7 +150,7 @@ export default function PromptPage() {
         {desc && (
           <>
            <p className={styles.description}>{desc}</p>
-            <button className={`${styles.submitBtn} ${styles.last}`} onClick={()=>{}}>
+            <button className={`${styles.submitBtn} ${styles.last}`} onClick={savedDescription}>
               Save
             </button>
             <button className={styles.submitBtn} onClick={()=>{clear("desc");toast.success("Discarded")}}>Discard</button>
