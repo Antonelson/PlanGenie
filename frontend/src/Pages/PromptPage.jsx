@@ -1,14 +1,14 @@
 import { useState } from "react";
 import styles from "./PromptPage.module.css";
 import Card from "../Components/ChecklistPreviewCard";
-
+import toast from "react-hot-toast"
 export default function PromptPage() {
   const [prompt, setPrompt] = useState("");
   const [loading, setLoading] = useState(false);
   const [desc, setDesc] = useState(null);
   const [plan, setPlan] = useState([]);
   const [restype, setRestype] = useState("checklist");
- 
+  const [heading, setHeading] = useState("");
   async function handleSubmit(e) {
     e.preventDefault();
 
@@ -22,20 +22,43 @@ export default function PromptPage() {
       });
 
       if (restype == "checkList") {
-        const data = await response.json();
-        setDesc(null)
-        setPlan(data.promptResult);
+        const wholeData = await response.json();
+        const data = wholeData.promptResult;
+        setDesc(null);
+        setPlan(data.checklist);
+        setHeading(data.heading);
+        // console.log(data.checklist)
+        // console.log(data.heading)
       } else {
         const data = await response.json();
+        const wholeData = data.promptResult;
+
         setPlan([]);
-        setDesc(data.promptResult);
-        console.log(desc);
+        setHeading(wholeData.heading);
+        setDesc(wholeData.description);
+        // console.log(desc);
       }
     } finally {
       setLoading(false);
     }
   }
-
+  async function saveCheckList(){
+    const response=await fetch("http://localhost:3000/post/checklistsave",{
+      method:"POST",
+      credentials:"include",
+      body:JSON.stringify({heading,plan}),
+      headers:{"Content-Type":"application/json"}
+    });
+    // console.log(await response.text())
+    toast.success("Converted as checklist");
+    clear("plan")
+  }
+    function clear(stateVar)
+    {
+      setHeading(null);
+      stateVar==="plan"?setPlan([]):setDesc(null);
+    }
+  
   return (
     <div className={styles.page}>
       <div className={styles.container}>
@@ -91,8 +114,11 @@ export default function PromptPage() {
           </button>
         </form>
 
-        {plan.length > 0 &&
-           plan.map((value) => {
+        {heading &&
+        <div className={styles.planCard}>
+          <h2 className={styles.planTitle}>{heading}</h2>
+        {plan.length > 0 &&  
+          plan.map((value) => {
             return (
               <Card
                 key={value.taskNumber}
@@ -101,21 +127,27 @@ export default function PromptPage() {
                 desc={value.description}
               />
             );
-          })
-          }
-          {plan.length>0 && <><button className={`${styles.submitBtn} ${styles.last}`}>Convert To CheckList</button><button className={styles.submitBtn}>Discard</button></>}
-
-        {desc && (
-          <div className={styles.planCard}>
-            <h2 className={styles.planTitle}>Generated Description</h2>
-            <p className={styles.description}>{desc}</p>
-          </div>
+          })}
+        {plan.length > 0 && (
+          <>
+            <button className={`${styles.submitBtn} ${styles.last}`} onClick={saveCheckList}>
+              Convert To CheckList
+            </button>
+            <button className={styles.submitBtn} onClick={()=>{clear("plan");toast.success("Discarded")}}>Discard</button>
+          </>
         )}
-
-        {desc && 
-            <><button className={`${styles.submitBtn} ${styles.last}`}>Save</button><button className={styles.submitBtn}>Dicard</button></>
-            }
-      </div>
+        {desc && (
+          <>
+           <p className={styles.description}>{desc}</p>
+            <button className={`${styles.submitBtn} ${styles.last}`} onClick={()=>{}}>
+              Save
+            </button>
+            <button className={styles.submitBtn} onClick={()=>{clear("desc");toast.success("Discarded")}}>Discard</button>
+          </>
+        )}
+      </div>}
+    </div>
     </div>
   );
+  
 }
