@@ -23,9 +23,8 @@ export default function PromptPage() {
 
       if (restype == "checkList") {
         const data = await response.json();
-        setDesc([])
+        setDesc(null)
         setPlan(data.promptResult);
-        // console.log(plan);
       } else {
         const data = await response.json();
         setPlan([]);
@@ -93,7 +92,7 @@ export default function PromptPage() {
         </form>
 
         {plan.length > 0 &&
-          plan.map((value) => {
+           plan.map((value) => {
             return (
               <Card
                 key={value.taskNumber}
@@ -102,14 +101,20 @@ export default function PromptPage() {
                 desc={value.description}
               />
             );
-          })}
+          })
+          }
+          {plan.length>0 && <><button className={`${styles.submitBtn} ${styles.last}`}>Convert To CheckList</button><button className={styles.submitBtn}>Discard</button></>}
 
-        {(
+        {desc && (
           <div className={styles.planCard}>
             <h2 className={styles.planTitle}>Generated Description</h2>
             <p className={styles.description}>{desc}</p>
           </div>
         )}
+
+        {desc && 
+            <><button className={`${styles.submitBtn} ${styles.last}`}>Save</button><button className={styles.submitBtn}>Dicard</button></>
+            }
       </div>
     </div>
   );
