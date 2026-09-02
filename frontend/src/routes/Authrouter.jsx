@@ -1,3 +1,4 @@
+import Home from "../Auth/Home.jsx";
 import Login from "../Auth/Login.jsx";
 import Register from "../Auth/Register.jsx";
 const Authrouter = [
@@ -6,6 +7,10 @@ const Authrouter = [
   },
   {
     path:"/register",element:<Register/>
+  },
+  {
+    path:"/",
+    element:<Home/>
   }
 ]
 

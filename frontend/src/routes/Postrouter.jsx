@@ -1,14 +1,16 @@
-import Home from "../Pages/Home";
 import PromptPage from "../Pages/PromptPage";
+import Layout from "../../Layout/Layout";
 
 const PostRouter = [
+{
+    path:"/promptpage",
+    element:<Layout/>,
+    children:[
+    
     {
-        path:"/",
-        element:<Home/>
-    },
-    {
-        path:"/promptpage",
+        index:true,
         element:<PromptPage/>
-    }
+    }]
+}
 ]
 export default PostRouter;

@@ -141,7 +141,7 @@ export default function PromptPage() {
           })}
         {plan.length > 0 && (
           <>
-            <button className={`${styles.submitBtn} ${styles.last}`} onClick={saveResult}>
+            <button className={`${styles.submitBtn} ${styles.last}`} onClick={saveCheckList}>
               Convert To CheckList
             </button>
             <button className={styles.submitBtn} onClick={()=>{clear("plan");toast.success("Discarded")}}>Discard</button>
