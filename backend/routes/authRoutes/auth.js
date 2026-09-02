@@ -62,7 +62,7 @@ router.post("/login", user_val, async (req, res) => {
         httpOnly: true,
         signed: true
     }); 
-    res.status(200).json("Logout Succesfully created");
+    res.status(200).json("Logout Succesfully");
   })
 
 export default router;
