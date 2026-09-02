@@ -10,7 +10,7 @@ export default function authMiddleware(req, res, next) {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     if (!decoded) return res.status(401).json({message:"Access denied. Invalid token."});
     req.user = decoded;
-    console.log(req.user)
+    // console.log(req.user)
     next();
   } catch (err) {
     return res.status(401).json({message:"Access denied. Invalid token."});

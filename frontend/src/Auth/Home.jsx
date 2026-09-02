@@ -15,7 +15,7 @@ export default function Home() {
       <div className={styles.actionPanel}>
         <div className={styles.card}>
           <h1 className={styles.title}>Plan Genie Here</h1>
-          <p className={styles.subtitle}>Choose an option to talk with Genie</p>
+          <p className={styles.subtitle}>Simply tell Genie what you want to accomplish. Our AI turns your goal into an organized, actionable plan that you can manage, complete, and track—all in one place.</p>
           <div className={styles.actions}>
             <button
               className={styles.primaryBtn}

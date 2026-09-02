@@ -28,7 +28,7 @@ export default function PromptPage() {
         return;
       }
       if (restype == "checkList") {
-        const wholeData = wholeData.promptResult;
+        const wholeData = data.promptResult;
         setDesc(null);
         setPlan(wholeData.checklist);
         setHeading(wholeData.heading);

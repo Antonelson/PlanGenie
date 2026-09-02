@@ -40,7 +40,7 @@ export default function Login() {
       <div className={styles.brandPanel}>
         <div className={styles.dotPattern} />
         <div className={styles.brandContent}>
-          <span className={styles.logo}>Planwise</span>
+          <span className={styles.logo}>PlanGenie</span>
           <h1 className={styles.brandHeading}>
             Turn intentions into
             <br />

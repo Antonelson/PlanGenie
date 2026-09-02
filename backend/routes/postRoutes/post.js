@@ -75,6 +75,7 @@ router.post("/checklistSave",jwtMiddleware, async (req, res) => {
   const {body:{heading,plan}}=req;
   
   const detail = new Details({
+    user:req.user.id,
     heading: heading,
     details:plan.map((items)=>{return {taskNo: items.taskNo, title: items.title, description:items.description}}) 
   }) ;
@@ -87,7 +88,7 @@ router.post("/descriptionsave",jwtMiddleware,async (req,res)=>{
   let {body:{heading,description}}=req;
 
   const descriptionObj=new Description(
-    {heading:heading,description:description}
+    {user:req.user.id,heading:heading,description:description}
   )
   const result=await descriptionObj.save();
   res.send(result)

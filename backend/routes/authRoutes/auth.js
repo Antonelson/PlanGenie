@@ -5,7 +5,7 @@ import user_val from "../../validation/authValidate.js";
 import { matchedData, validationResult } from "express-validator";
 import jwt from "jsonwebtoken";
 import "dotenv/config";
-
+import jwtMiddleware from "../../middleware/authMiddleware.js"
 const router = express.Router();
 
 
@@ -55,8 +55,14 @@ router.post("/login", user_val, async (req, res) => {
   }
 });
 
-  router.post("/logout",(req,res)=>{
 
+
+  router.post("/logout",jwtMiddleware,(req,res)=>{
+    res.clearCookie("jwt", {
+        httpOnly: true,
+        signed: true
+    }); 
+    res.status(200).json("Logout Succesfully created");
   })
 
 export default router;
