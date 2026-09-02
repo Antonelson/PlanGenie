@@ -20,19 +20,22 @@ export default function PromptPage() {
         headers: { "Content-Type": "application/json" },
         credentials: "include",
       });
-
+      const data = await response.json();
+      console.log(data)
+      if(!response.ok)
+      {
+        toast.error(data.message)
+        return;
+      }
       if (restype == "checkList") {
-        const wholeData = await response.json();
-        const data = wholeData.promptResult;
+        const wholeData = wholeData.promptResult;
         setDesc(null);
-        setPlan(data.checklist);
-        setHeading(data.heading);
+        setPlan(wholeData.checklist);
+        setHeading(wholeData.heading);
         // console.log(data.checklist)
         // console.log(data.heading)
       } else {
-        const data = await response.json();
         const wholeData = data.promptResult;
-
         setPlan([]);
         setHeading(wholeData.heading);
         setDesc(wholeData.description);

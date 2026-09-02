@@ -5,7 +5,6 @@ import user_val from "../../validation/authValidate.js";
 import { matchedData, validationResult } from "express-validator";
 import jwt from "jsonwebtoken";
 import "dotenv/config";
-import cookie from "cookie-parser";
 
 const router = express.Router();
 
@@ -39,11 +38,13 @@ router.post("/login", user_val, async (req, res) => {
   try {
     const data = matchedData(req);
     const user = await User.findOne({ gmail: data.gmail });
+    console.log(user)
     if (!user) return res.status(400).json({message:"User Not Fund"});
+
     if (!hashCompare(user.password, data.password))
       return res.status(400).json({message:"Invalid Password"});
     
-    const token = jwt.sign({ gmail: user.gmail }, process.env.JWT_SECRET, {
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
       expiresIn: "1h",
     });
     
@@ -53,5 +54,9 @@ router.post("/login", user_val, async (req, res) => {
     return res.status(500).send(err.message);
   }
 });
+
+  router.post("/logout",(req,res)=>{
+
+  })
 
 export default router;

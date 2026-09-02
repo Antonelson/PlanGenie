@@ -1,6 +1,10 @@
 import mongoose from "mongoose";
 
 const schema=mongoose.Schema({
+    user:{
+        type:String,
+        required:true
+    },
     heading:{type:String,required:true},
     details:[{
         taskNo:{type:Number},

@@ -11,7 +11,7 @@ router.get("/check", jwtMiddleware, (req, res) => {
   res.send("Post route is working");
 });
 
-router.post("/prompt", async (req, res) => {
+router.post("/prompt",jwtMiddleware, async (req, res) => {
   console.log(req.body);
   const data = await callGemini(req.body);
   //     const data=[
@@ -71,7 +71,7 @@ router.post("/prompt", async (req, res) => {
   res.json({ promptResult: data });
 });
 
-router.post("/checklistSave", async (req, res) => {
+router.post("/checklistSave",jwtMiddleware, async (req, res) => {
   const {body:{heading,plan}}=req;
   
   const detail = new Details({
@@ -82,7 +82,7 @@ router.post("/checklistSave", async (req, res) => {
   res.send(result);
 });
 
-router.post("/descriptionsave",async (req,res)=>{
+router.post("/descriptionsave",jwtMiddleware,async (req,res)=>{
   console.log(req.body);
   let {body:{heading,description}}=req;
 

@@ -1,5 +1,5 @@
 import PromptPage from "../Pages/PromptPage";
-import Layout from "../../Layout/Layout";
+import Layout from "../Layout/Layout";
 
 const PostRouter = [
 {
