@@ -11,19 +11,19 @@ export default function Navbar() {
             Home
           </NavLink>
           <NavLink
-            to="/promptpage/profile"
+            to="/profile"
             className={({ isActive }) => `${styles.navLink} ${isActive ? styles.active : ""}`}
           >
             Profile
           </NavLink>
           <NavLink
-            to="/promptpage/checklist"
+            to="/checklist"
             className={({ isActive }) => `${styles.navLink} ${isActive ? styles.active : ""}`}
           >
             Checklist
           </NavLink>
           <NavLink
-            to="/promptpage/description"
+            to="/description"
             className={({ isActive }) => `${styles.navLink} ${isActive ? styles.active : ""}`}
           >
             Description

@@ -6,6 +6,7 @@ const schema = mongoose.Schema({
     ref: "users",
     required: true,
   },
+  
   heading: { type: String, required: true },
   details: [
     {

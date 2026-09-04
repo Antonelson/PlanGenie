@@ -50,12 +50,14 @@ function handleLogout() {
       <header className={styles.navbar}>
         <div className={styles.navbarLogo}>
           <span className={styles.logoIcon}>
-            {" "}
+            
             <img src="/asset/image/logo.svg" alt="PlanGenie" />
           </span>
           <span className={styles.logoText}>PlanGenie</span>
         </div>
-        <Navbar></Navbar>
+        <Navbar>
+          
+        </Navbar>
 
         <button className={styles.getStartedBtn} onClick={handleLogout}>
           Logout

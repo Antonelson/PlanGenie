@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styles from "./PromptPage.module.css";
-import Card from "../Components/ChecklistPreviewCard";
+import Card from "../../Components/ChecklistPreviewCard";
 import toast from "react-hot-toast"
 export default function PromptPage() {
   const [prompt, setPrompt] = useState("");
@@ -57,6 +57,7 @@ export default function PromptPage() {
     clear("desc")
   }
   async function saveCheckList(){
+    console.log(plan)
     const response=await fetch("http://localhost:3000/post/checklistsave",{
       method:"POST",
       credentials:"include",

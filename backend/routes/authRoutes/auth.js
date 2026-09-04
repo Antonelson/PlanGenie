@@ -38,7 +38,7 @@ router.post("/login", user_val, async (req, res) => {
   try {
     const data = matchedData(req);
     const user = await User.findOne({ gmail: data.gmail });
-    console.log(user)
+    // console.log(user)
     if (!user) return res.status(400).json({message:"User Not Fund"});
 
     if (!hashCompare(user.password, data.password))
