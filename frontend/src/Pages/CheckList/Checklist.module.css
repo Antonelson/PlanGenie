@@ -55,7 +55,23 @@
   color: #666;
   font-size: 0.9rem;
 }
+.submitBtn {
+  align-self: flex-end;
+  background: var(--color-primary);
+  color: #14151a;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 12px 24px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
 
+.submitBtn:hover {
+  background: var(--color-primary-hover);
+}
 @keyframes slideIn {
   from {
     opacity: 0;

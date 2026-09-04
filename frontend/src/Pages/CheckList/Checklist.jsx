@@ -100,7 +100,9 @@ export default function CheckList() {
             items={selectedChecklist.details}
             toggleFunction={toggleUpdate}
           />
+           <button className={styles.submitBtn} onClick={()=>{setSelectedChecklist(null)}}>Close</button>
         </div>
+       
       )}
     </div>
   );

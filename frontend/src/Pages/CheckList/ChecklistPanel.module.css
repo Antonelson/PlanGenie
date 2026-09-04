@@ -4,6 +4,7 @@
   font-family: var(--font-body);
   padding: var(--spacing-lg) var(--spacing-md);
   min-height: 100%;
+  padding-bottom: 0%;
 }
 
 .heading {
@@ -104,3 +105,5 @@
   opacity: 1;
   color:blue
 }
+
+

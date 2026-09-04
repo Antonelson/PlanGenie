@@ -4,6 +4,8 @@ import "dotenv/config";
 import callGemini from "../../helper_methods/callGemini.js";
 import { Details } from "../../Schema/checkListSchema.js";
 import { Description } from "../../Schema/Description.js";
+import  User  from "../../Schema/authSchema.js";
+
 const router = express.Router();
 
 router.get("/check", jwtMiddleware, (req, res) => {
@@ -89,13 +91,10 @@ router.post("/checklistSave", jwtMiddleware, async (req, res) => {
     }),
   });
   const result = await detail.save();
-  // console.log("result")
-  // console.log(result)
   res.send(result);
 });
 
 router.post("/descriptionsave", jwtMiddleware, async (req, res) => {
-  // console.log(req.body);
   let {
     body: { heading, description },
   } = req;
@@ -121,7 +120,6 @@ router.get("/headings", jwtMiddleware, async (req, res) => {
 
 router.get("/headings/:id", jwtMiddleware, async (req, res) => {
   const headID = req.params.id;
-  // console.log(headID)
   const result = await Details.findOne({ user: req.user.id, _id: headID });
   console.log(result);
   res.json({ resultArray: result });
@@ -136,7 +134,6 @@ router.patch("/checkListUpdate/:id", jwtMiddleware, async (req, res) => {
       },
     );
     const boolValue = !find.details[0].completion;
-    // console.log(boolValue)
     const result = await Details.updateOne(
       { user: req.user.id, "details._id": taskID },
       { $set: { "details.$.completion": boolValue } },
@@ -149,5 +146,17 @@ router.patch("/checkListUpdate/:id", jwtMiddleware, async (req, res) => {
   } catch (e) {
     res.status(500).json({ message: "ERROR" });
   }
+});
+
+
+
+router.get("/profileFetch", jwtMiddleware, async (req, res) => {
+  const userId = req.user.id;
+  const ckresult = await Details.find({ user: userId });
+  const resultUser = await User.findOne({ _id: userId });
+  const dresult=await Description.find({user:userId});
+  console.log(dresult.length)
+  // res.json()
+  res.json({ ChecklistCount: ckresult.length, mail: resultUser.gmail,  DescriptionCount:dresult.length});
 });
 export default router;
