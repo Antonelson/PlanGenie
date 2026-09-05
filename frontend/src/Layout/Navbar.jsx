@@ -10,12 +10,7 @@ export default function Navbar() {
           >
             Home
           </NavLink>
-          <NavLink
-            to="/profile"
-            className={({ isActive }) => `${styles.navLink} ${isActive ? styles.active : ""}`}
-          >
-            Profile
-          </NavLink>
+         
           <NavLink
             to="/checklist"
             className={({ isActive }) => `${styles.navLink} ${isActive ? styles.active : ""}`}
@@ -27,6 +22,12 @@ export default function Navbar() {
             className={({ isActive }) => `${styles.navLink} ${isActive ? styles.active : ""}`}
           >
             Description
+          </NavLink>
+           <NavLink
+            to="/profile"
+            className={({ isActive }) => `${styles.navLink} ${isActive ? styles.active : ""}`}
+          >
+            Profile
           </NavLink>
         </nav>
   );

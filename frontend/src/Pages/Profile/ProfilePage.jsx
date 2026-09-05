@@ -6,7 +6,7 @@ export default function Profile(){
 
     useEffect(()=>{
         async function fetchProfileData(){
-            const response = await fetch("http://localhost:3000/post/profileFetch",{
+            const response = await fetch("http://localhost:3000/profile/profileFetch",{
                 method:"GET",
                 credentials:"include"
             })

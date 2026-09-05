@@ -1,10 +1,9 @@
-import express from "express";
+import express, { response } from "express";
 import jwtMiddleware from "../../middleware/authMiddleware.js";
 import "dotenv/config";
 import callGemini from "../../helper_methods/callGemini.js";
 import { Details } from "../../Schema/checkListSchema.js";
 import { Description } from "../../Schema/Description.js";
-import  User  from "../../Schema/authSchema.js";
 
 const router = express.Router();
 
@@ -77,8 +76,6 @@ router.post("/checklistSave", jwtMiddleware, async (req, res) => {
   const {
     body: { heading, plan },
   } = req;
-  // console.log("incomming")
-  // console.log(plan)
   const detail = new Details({
     user: req.user.id,
     heading: heading,
@@ -112,16 +109,14 @@ router.get("/headings", jwtMiddleware, async (req, res) => {
   console.log(req.user.id);
   const result = await Details.find(
     { user: req.user.id },
-    { heading: 1, "details.title": 1 },
+    { heading: 1 },
   );
-  console.log(result);
   res.json(result);
 });
 
 router.get("/headings/:id", jwtMiddleware, async (req, res) => {
   const headID = req.params.id;
   const result = await Details.findOne({ user: req.user.id, _id: headID });
-  console.log(result);
   res.json({ resultArray: result });
 });
 router.patch("/checkListUpdate/:id", jwtMiddleware, async (req, res) => {
@@ -148,15 +143,29 @@ router.patch("/checkListUpdate/:id", jwtMiddleware, async (req, res) => {
   }
 });
 
+router.get("/descHeading",jwtMiddleware,async (req,res)=>{
+  const result=await Description.find({user:req.user.id},{description:0})
+  // if(!result.ok)
+  //   res.status(500).json("Something went Wrong")
+  res.status(200).json({resultArray:result})
+})
 
+router.get("/descHeading/:id",jwtMiddleware,async (req,res)=>{
+  const descId=req.params.id;
+  const result=await Description.findOne({user:req.user.id,_id:descId})
+  res.json({descData:result})
+})
 
-router.get("/profileFetch", jwtMiddleware, async (req, res) => {
-  const userId = req.user.id;
-  const ckresult = await Details.find({ user: userId });
-  const resultUser = await User.findOne({ _id: userId });
-  const dresult=await Description.find({user:userId});
-  console.log(dresult.length)
-  // res.json()
-  res.json({ ChecklistCount: ckresult.length, mail: resultUser.gmail,  DescriptionCount:dresult.length});
-});
+router.delete("/checkListDelete/:id",jwtMiddleware,async (req,res)=>{
+  const checkListID=req.params.id;
+  const done=await Details.deleteOne({user:req.user.id,_id:checkListID})
+  res.json({msg:"successfullyDelete"});
+})
+
+router.delete("/DescriptionDelete/:id",jwtMiddleware,async (req,res)=>{
+  const descID=req.params.id;
+  console.log(descID)
+  const result=await Description.deleteOne({user:req.user.id,_id:descID})
+  res.json({msg:result});
+})
 export default router;

@@ -2,11 +2,12 @@ import { useState } from "react";
 import styles from "./Login.module.css";
 import { useNavigate,Link } from "react-router-dom";
 import {toast} from "react-hot-toast"  
-
+import {Eye,EyeOff} from "lucide-react"
 
 export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [eye,setEye]=useState(true)
   const navigate=useNavigate();
   async function handleSubmit(e) {
     e.preventDefault();
@@ -58,12 +59,17 @@ export default function Register() {
 
             <div className={styles.field}>
               <label className={styles.label}>Password</label>
-              <input
-                className={styles.input}
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
+             <div className={styles.passwordWrapper}>
+                  <input
+                    className={styles.input}
+                    type={eye ? "password" : "text"}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                  <button onClick={() => setEye((prev) => !prev)}  className={styles.eyeBtn}>
+                     {eye ? <EyeOff size={18} /> : <Eye size={18} />}
+                  </button>
+                </div>
             </div>
 
             <button type="submit" className={styles.submitBtn}>Register</button>

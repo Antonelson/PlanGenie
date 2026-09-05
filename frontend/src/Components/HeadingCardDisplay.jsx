@@ -1,4 +1,4 @@
-export default function CheckListCardDisplay({ heading ,id}) {
+export default function HeadingCardDisplay({ heading ,id}) {
   return (
     <div className="clc-card" >
       <style>{`

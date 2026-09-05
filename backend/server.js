@@ -1,8 +1,10 @@
 import express from "express";
 import authRoutes from "./routes/authRoutes/auth.js";
+import postRoute from "./routes/postRoutes/post.js";
+import profileRoute from "./routes/profileRoutes/profile.js"
 import "dotenv/config";
 import mongoose from "mongoose";
-import postRoute from "./routes/postRoutes/post.js";
+
 import cors from "cors";
 import cookieParser from "cookie-parser";
 
@@ -19,6 +21,7 @@ app.use(express.json());
 app.use(cookieParser(process.env.COOKIE_SECRET))
 app.use("/auth", authRoutes);
 app.use("/post", postRoute);
+app.use("/profile",profileRoute)
 
 
 async function connectDB()

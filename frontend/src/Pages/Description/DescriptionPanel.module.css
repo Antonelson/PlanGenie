@@ -1,0 +1,25 @@
+.wrap {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  padding: var(--spacing-lg) var(--spacing-md);
+  min-height: 100%;
+  padding-bottom: 0%;
+}
+
+.heading {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 28px;
+  letter-spacing: -0.01em;
+  margin: 0 0 var(--spacing-lg) 0;
+  max-width: 34ch;
+}
+
+.description {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+  max-width: 560px;
+}

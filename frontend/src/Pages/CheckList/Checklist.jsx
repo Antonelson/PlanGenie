@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import CheckListCardDisplay from "./CheckListCardDisplay";
+import HeadingCardDisplay from "../../Components/HeadingCardDisplay";
 import styles from "./Checklist.module.css";
 import ChecklistPanel from "./ChecklistPanel";
 export default function CheckList() {
@@ -82,10 +82,29 @@ export default function CheckList() {
         }}
         key={item._id}
       >
-        <CheckListCardDisplay id={item._id} heading={item.heading} />
+        <HeadingCardDisplay id={item._id} heading={item.heading} />
       </button>
     );
   });
+  async function deleteList()
+  {
+    try{
+        const response=await fetch(`http://localhost:3000/post/checkListDelete/${selectedChecklist._id}`,{
+          method:"Delete",
+          credentials:"include"
+        })
+        const data=await response.json();
+        if(!response.ok)
+        {
+            toast.error("Cant delete");
+        }
+        getHeading();
+        setSelectedChecklist(null)
+    }
+    catch(e){
+        toast.error("Cant delete");
+    }
+  }
 
   return (
     <div
@@ -101,6 +120,7 @@ export default function CheckList() {
             toggleFunction={toggleUpdate}
           />
            <button className={styles.submitBtn} onClick={()=>{setSelectedChecklist(null)}}>Close</button>
+            <button className={`${styles.submitBtn} ${styles.delete} `} onClick={deleteList}>Delete</button>
         </div>
        
       )}
